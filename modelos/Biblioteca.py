@@ -1,4 +1,5 @@
 from modelos.Avaliacao import Avaliacao
+from modelos.itens.ItemBiblioteca import ItemBiblioteca
 
 
 class Biblioteca:
@@ -7,6 +8,7 @@ class Biblioteca:
         self.nome = nome 
         self._ativo = False
         self._avaliacao = []
+        self._itens = []
         Biblioteca.bibliotecas.append(self)
 
 
@@ -17,7 +19,7 @@ class Biblioteca:
 
     # função para a classe
     @classmethod
-    def listar_Bibliotecas( cls ) -> str:
+    def listar_Bibliotecas( cls ):
     #   Lista o nome e a sitação das biliotecas estanciadas
         print(f"{'Nome da bilioteca'.ljust(25)}  |  {'Nota média'.ljust(25)}  |  {'Status'}")#  ljust  adiciona um espaçamento
         for biblioteca in Biblioteca.bibliotecas:
@@ -48,6 +50,19 @@ class Biblioteca:
         media = round(soma / len(self._avaliacao), 1)
         return media
 
+    def adicionar_itens(self, item):
+        if isinstance(item, ItemBiblioteca):
+            self._itens.append(item)
+    
+    def exibir_Itens(self):
+        print(f"Itens da Biblioteca {self.nome}\n")
+        for indice, item in enumerate(self._itens, start =1):
+            if hasattr(item, "isbn"):
+                msg_livro = f'{indice}. Titulo: {item._titulo} | Autor: {item._autor} | Preço: {item._preco} | ISBN: {item.isbn}'
+                print(msg_livro)
+            else:
+                msg_revisa= f'{indice}. Titulo: {item._titulo} | Autor: {item._autor} | Preço: {item._preco} | Edição: {item.edicao}'
+                print(msg_revisa)
 
 
 
