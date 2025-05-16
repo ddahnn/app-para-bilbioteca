@@ -1,2 +1,4 @@
-/modules/__pycache__/
-/modules/itens/__pycache__/
+
+__pycache__/
+**/__pycache__/
+*.py[cod]
